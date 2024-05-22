@@ -1,3 +1,56 @@
+## root .gitignore file applies to the entire project
+# additional .gitignore files in subdirectories, they apply only to the files and directories 
+# within those specific directories and their subdirectories
+
+# Ignore any JSON files that contain the word "key" in their filename
+*key*.json
+# Ignore all files with ".json" extension
+*.json
+
+# MacOS
+.DS_Store
+
+# python artifacts
+__pycache__/
+
+# Data artifacts
+**/postgres_data/
+**/*data*/
+**/data/
+**/output/
+*.parquet
+*.csv
+*.zip
+*.gz
+
+# models artifacts
+**/model/
+*.pkl
+*.joblib
+*.bin
+*.np
+*.h5
+*.keras
+*.tflite
+
+# mlflow artifacts
+**/mlflow/
+**/mlruns/
+**/artifacts/
+*.db
+
+# prefect artifacts
+.prefectignore
+
+# Editors
+.idea/
+.vscode/
+
+# VCS
+.git/
+.hg/
+
+#######################################
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
