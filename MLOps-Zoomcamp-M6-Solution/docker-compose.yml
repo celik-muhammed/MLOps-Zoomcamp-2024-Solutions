@@ -1,0 +1,34 @@
+## docker-compose.yml
+## Specifies the Docker Compose file version
+version: '3.9'
+
+## Defines networks that can be used by services in the Docker Compose file
+networks:
+  ## Declares a network named "back-tier"
+  back-tier:
+  ## Declares a network named "front-tier"
+  front-tier:
+    # driver: bridge
+
+
+## Declares services (containers) that will be run by Docker Compose
+services:
+  localstack:
+    stdin_open: true # used for interactive debugging
+    tty: true # used for interactive debugging
+    restart: "always"
+    image: "localstack/localstack:latest"
+    working_dir: "/opt/code/localstack"
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3
+      - DEBUG=1
+      - DATA_DIR="/opt/code/localstack/data"
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./data:/opt/code/localstack/data:ro"
+    networks:
+      - back-tier
+      - front-tier
